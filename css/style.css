@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1054px;
+  margin: 0 auto;
+  padding: 0 0.9rem;
+}
+
+li {
+  list-style: none;
+  border-bottom: 1px dotted grey;
+}
+
+li:hover {
+  background-color: blanchedalmond;
+  cursor: pointer;
+}
+
+.album {
+  display: flex;
+  justify-content: space-around;
+  max-height: 60rem;
+}
+.album__photos {
+  display: flex;
+  flex-wrap: wrap;
+}
+.album__list, .album__photos {
+  flex-basis: 45%;
+  background-color: aliceblue;
+  overflow: scroll;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+}
