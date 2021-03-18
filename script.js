@@ -54,9 +54,8 @@ function renderPhotos($photo) {
 
 function renderAlbumPhotoEventListener() {
 	$albumList.click((event) => {
-		const albumId = event.target.dataset.idNumber;
 		clearAlbumPhotos();
-		getAndRenderPhotos(albumId);
+		getAndRenderPhotos(event.target.dataset.idNumber);
 	})
 }
 
