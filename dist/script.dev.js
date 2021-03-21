@@ -9,17 +9,12 @@ function init() {
   renderAlbumPhotoEventListener();
 }
 
-init();
+init(); // RENDERING
 
 function getAndRenderAlbums() {
   sendGetRequestAlbums().then(function (albums) {
     return createAlbumItem(albums);
   });
-} // RENDERING
-
-
-function renderPhotos($photo) {
-  $albumPhotos.append($photo);
 }
 
 function renderAlbums($albumItem) {
@@ -30,7 +25,11 @@ function renderFirstAlbumPhotos() {
   sendGetRequestAlbums().then(function (response) {
     return getAndRenderPhotos(response[0].id);
   });
-} //REQUESTS
+}
+
+function renderPhotos($photo) {
+  $albumPhotos.append($photo);
+} // REQUESTS
 
 
 function sendGetRequestAlbums() {
@@ -64,7 +63,7 @@ function createPhotoList(photoList) {
 
 function clearAlbumPhotos() {
   $albumPhotos.empty();
-} //EVENT LISTENER 
+} // EVENT LISTENER 
 
 
 function renderAlbumPhotoEventListener() {

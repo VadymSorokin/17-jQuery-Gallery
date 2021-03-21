@@ -8,17 +8,12 @@ function init() {
 }
 init()
 
-function getAndRenderAlbums() {
-	sendGetRequestAlbums()
-	.then((albums) => createAlbumItem(albums))
-}
-
 // RENDERING
 
-function renderPhotos($photo) {
-	$albumPhotos.append($photo);
+function getAndRenderAlbums() {
+	sendGetRequestAlbums()
+		.then((albums) => createAlbumItem(albums))
 }
-
 function renderAlbums($albumItem) {
 	$albumList.append($albumItem);
 }
@@ -28,7 +23,11 @@ function renderFirstAlbumPhotos() {
 		.then((response) => getAndRenderPhotos(response[0].id))
 }
 
-//REQUESTS
+function renderPhotos($photo) {
+	$albumPhotos.append($photo);
+}
+
+// REQUESTS
 
 function sendGetRequestAlbums() {
 	return fetch('https://jsonplaceholder.typicode.com/albums')
@@ -60,7 +59,7 @@ function createPhotoList(photoList) {
 function clearAlbumPhotos() {
 	$albumPhotos.empty();
 }
-//EVENT LISTENER 
+// EVENT LISTENER 
 
 function renderAlbumPhotoEventListener() {
 	$albumList.click((event) => {
