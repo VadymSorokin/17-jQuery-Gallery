@@ -59,6 +59,7 @@ function createPhotoList(photoList) {
 function clearAlbumPhotos() {
 	$albumPhotos.empty();
 }
+
 // EVENT LISTENER 
 
 function renderAlbumPhotoEventListener() {
