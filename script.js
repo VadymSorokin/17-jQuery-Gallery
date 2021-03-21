@@ -4,26 +4,19 @@ const $albumPhotos = $('.album__photos');
 function init() {
 	renderFirstAlbumPhotos();
 	getAndRenderAlbums();
-	getAndRenderPhotos();
 	renderAlbumPhotoEventListener();
 }
 init()
 
 function getAndRenderAlbums() {
 	sendGetRequestAlbums()
-		.then((albums) => createAlbumItem(albums))
+	.then((albums) => createAlbumItem(albums))
 }
 
-function sendGetRequestAlbums() {
-	return fetch('https://jsonplaceholder.typicode.com/albums')
-		.then((response) => response.json())
-}
+// RENDERING
 
-function createAlbumItem(albums) {
-	for (let i = 0; i < albums.length; i++) {
-		const $albumItem = $(`<li data-id-number="${[i + 1]}">album ${albums[i].id}: ${albums[i].title}</li>`);
-		renderAlbums($albumItem);
-	}
+function renderPhotos($photo) {
+	$albumPhotos.append($photo);
 }
 
 function renderAlbums($albumItem) {
@@ -35,10 +28,26 @@ function renderFirstAlbumPhotos() {
 		.then((response) => getAndRenderPhotos(response[0].id))
 }
 
+//REQUESTS
+
+function sendGetRequestAlbums() {
+	return fetch('https://jsonplaceholder.typicode.com/albums')
+		.then((response) => response.json())
+}
+
 function getAndRenderPhotos(albumId) {
 	fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${(albumId)}`)
 		.then((response) => response.json())
 		.then((photoList) => createPhotoList(photoList))
+}
+
+// HTML BASIS
+
+function createAlbumItem(albums) {
+	for (let i = 0; i < albums.length; i++) {
+		const $albumItem = $(`<li data-id-number="${[i + 1]}">album ${albums[i].id}: ${albums[i].title}</li>`);
+		renderAlbums($albumItem);
+	}
 }
 
 function createPhotoList(photoList) {
@@ -48,17 +57,14 @@ function createPhotoList(photoList) {
 	}
 }
 
-function renderPhotos($photo) {
-	$albumPhotos.append($photo);
+function clearAlbumPhotos() {
+	$albumPhotos.empty();
 }
+//EVENT LISTENER 
 
 function renderAlbumPhotoEventListener() {
 	$albumList.click((event) => {
 		clearAlbumPhotos();
 		getAndRenderPhotos(event.target.dataset.idNumber);
 	})
-}
-
-function clearAlbumPhotos() {
-	$albumPhotos.empty();
 }
