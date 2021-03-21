@@ -2,7 +2,7 @@ const $albumList = $('.album__list');
 const $albumPhotos = $('.album__photos');
 
 function init() {
-	renderFirstAlbumPhotos();
+	getAndRenderPhotos();
 	getAndRenderAlbums();
 	renderAlbumPhotoEventListener();
 }
@@ -17,12 +17,6 @@ function getAndRenderAlbums() {
 function renderAlbums($albumItem) {
 	$albumList.append($albumItem);
 }
-
-function renderFirstAlbumPhotos() {
-	sendGetRequestAlbums()
-		.then((response) => getAndRenderPhotos(response[0].id))
-}
-
 function renderPhotos($photo) {
 	$albumPhotos.append($photo);
 }
@@ -34,7 +28,7 @@ function sendGetRequestAlbums() {
 		.then((response) => response.json())
 }
 
-function getAndRenderPhotos(albumId) {
+function getAndRenderPhotos(albumId = 1) {
 	fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${(albumId)}`)
 		.then((response) => response.json())
 		.then((photoList) => createPhotoList(photoList))
