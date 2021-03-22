@@ -2,11 +2,10 @@ const $albumList = $('.album__list');
 const $albumPhotos = $('.album__photos');
 
 function init() {
-	getAndRenderPhotos();
 	getAndRenderAlbums();
+	getAndRenderPhotos();
 	renderAlbumPhotoEventListener();
 }
-init()
 
 // RENDERING
 
@@ -62,3 +61,11 @@ function renderAlbumPhotoEventListener() {
 		getAndRenderPhotos(event.target.dataset.idNumber);
 	})
 }
+
+//function firstID() {
+//	const $firstAlbumId = $('ul.album__list li').first().data('idNumber');
+//	console.log($firstAlbumId);
+//	return $firstAlbumId;
+//}
+//firstID()
+init()

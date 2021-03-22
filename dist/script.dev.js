@@ -4,12 +4,11 @@ var $albumList = $('.album__list');
 var $albumPhotos = $('.album__photos');
 
 function init() {
-  getAndRenderPhotos();
   getAndRenderAlbums();
+  getAndRenderPhotos();
   renderAlbumPhotoEventListener();
-}
+} // RENDERING
 
-init(); // RENDERING
 
 function getAndRenderAlbums() {
   sendGetRequestAlbums().then(function (albums) {
@@ -66,4 +65,12 @@ function renderAlbumPhotoEventListener() {
     clearAlbumPhotos();
     getAndRenderPhotos(event.target.dataset.idNumber);
   });
-}
+} //function firstID() {
+//	const $firstAlbumId = $('ul.album__list li').first().data('idNumber');
+//	console.log($firstAlbumId);
+//	return $firstAlbumId;
+//}
+//firstID()
+
+
+init();
