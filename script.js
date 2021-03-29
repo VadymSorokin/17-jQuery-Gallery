@@ -1,45 +1,37 @@
 const $albumList = $('.album__list');
 const $albumPhotos = $('.album__photos');
 
-function init() {
-	getAndRenderAlbums();
-	getAndRenderPhotos();
-	renderAlbumPhotoEventListener();
-}
-
-// RENDERING
-
-function getAndRenderAlbums() {
-	sendGetRequestAlbums()
-		.then((albums) => createAlbumItem(albums))
-}
-function renderAlbums($albumItem) {
-	$albumList.append($albumItem);
-}
-function renderPhotos($photo) {
-	$albumPhotos.append($photo);
-}
-
-// REQUESTS
-
+//REQUESTS
 function sendGetRequestAlbums() {
 	return fetch('https://jsonplaceholder.typicode.com/albums')
 		.then((response) => response.json())
 }
 
-function getAndRenderPhotos(albumId = 1) {
+function getAndRenderAlbums() {
+	sendGetRequestAlbums()
+		.then((albums) => createAlbums(albums));
+}
+
+function getAndRenderPhotos(albumId) {
 	fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${(albumId)}`)
 		.then((response) => response.json())
 		.then((photoList) => createPhotoList(photoList))
 }
+//RENDERING
+function renderAlbums($albumItem) {
+	$albumList.append($albumItem);
+}
 
-// HTML BASIS
-
-function createAlbumItem(albums) {
+function renderPhotos($photo) {
+	$albumPhotos.append($photo);
+}
+//LOGIC
+function createAlbums(albums) {
 	for (let i = 0; i < albums.length; i++) {
 		const $albumItem = $(`<li data-id-number="${[i + 1]}">album ${albums[i].id}: ${albums[i].title}</li>`);
 		renderAlbums($albumItem);
 	}
+	getAndRenderPhotos(albums[0].id)
 }
 
 function createPhotoList(photoList) {
@@ -52,20 +44,16 @@ function createPhotoList(photoList) {
 function clearAlbumPhotos() {
 	$albumPhotos.empty();
 }
-
-// EVENT LISTENER 
-
+//EVENT LISTENER
 function renderAlbumPhotoEventListener() {
 	$albumList.click((event) => {
 		clearAlbumPhotos();
 		getAndRenderPhotos(event.target.dataset.idNumber);
 	})
 }
-
-//function firstID() {
-//	const $firstAlbumId = $('ul.album__list li').first().data('idNumber');
-//	console.log($firstAlbumId);
-//	return $firstAlbumId;
-//}
-//firstID()
+//INIT
+function init() {
+	getAndRenderAlbums();
+	renderAlbumPhotoEventListener();
+}
 init()
