@@ -9,7 +9,7 @@ function sendGetRequestAlbums() {
 
 function getAndRenderAlbums() {
 	sendGetRequestAlbums()
-		.then((albums) => createAlbums(albums));
+		.then((albums) => createAlbumsAndRenderFirstAlbumPhotos(albums));
 }
 
 function getAndRenderPhotos(albumId) {
@@ -26,7 +26,7 @@ function renderPhotos($photo) {
 	$albumPhotos.append($photo);
 }
 //LOGIC
-function createAlbums(albums) {
+function createAlbumsAndRenderFirstAlbumPhotos(albums) {
 	for (let i = 0; i < albums.length; i++) {
 		const $albumItem = $(`<li data-id-number="${[i + 1]}">album ${albums[i].id}: ${albums[i].title}</li>`);
 		renderAlbums($albumItem);
