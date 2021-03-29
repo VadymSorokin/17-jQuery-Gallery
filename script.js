@@ -36,7 +36,7 @@ function createAlbums(albums) {
 
 function createPhotoList(photoList) {
 	for (let i = 0; i < photoList.length; i++) {
-		const $photo = $(`<li><img src="${photoList[i].url} alt="photo number ${photoList[i].id}"></li>`);
+		const $photo = $(`<li><img src="${photoList[i].url}" alt="${photoList[i].title}" data-album-id="${photoList[i].albumId}"></li>`);
 		renderPhotos($photo);
 	}
 }
